@@ -6,7 +6,7 @@ const log = console.log;
 const _ = require('lodash');
 var Promise = require('bluebird');
 
-const init_schemas = ['intern', 'test1'];
+const init_schemas = ['intern', 'test1','one_to_one'];
 
 module.exports = {
     init_schemas: async function() {

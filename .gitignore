@@ -23,4 +23,5 @@ npm-debug.log
 
 public/bower_components
 .idea
-
+.nyc_output
+coverage

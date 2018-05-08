@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["./ts"],
+    "allowJs": true,
+    "target": "es6",
+    "lib": [ "es2015" ],
+    "module": "commonjs"
+  },
+  "include": [
+    "./ts/"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,1 @@
+require('./utlis/init_schema').init_schemas();
