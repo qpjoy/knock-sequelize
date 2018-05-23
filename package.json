@@ -52,6 +52,7 @@
     "typescript-eslint-parser": "^8.0.0"
   },
   "dependencies": {
+    "@types/chai-as-promised": "0.0.31",
     "bluebird": "^3.5.1",
     "body-parser": "~1.13.2",
     "chalk": "^2.4.1",
@@ -66,7 +67,7 @@
     "sequelize": "^4.37.6",
     "sequelize-cli": "^4.0.0",
     "serve-favicon": "~2.3.0",
-    "@types/chai-as-promised": "0.0.31"
+    "shelljs": "^0.8.2"
   },
   "eslintConfig": {
     "extends": [
