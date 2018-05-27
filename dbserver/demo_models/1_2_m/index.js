@@ -2,14 +2,10 @@ var models = require('../index');
 
 
 models.sequelize.sync(
-
-
     {
         force: true
     }
-
-
-).then(async() => {
+).then(async () => {
     // add
 
     var t = await models.sequelize.transaction();
@@ -17,21 +13,21 @@ models.sequelize.sync(
         let team = await models['team1'].create({
             name: 'team_name_one',
             desc: 'this is desc one'
-        },{t});
+        }, {t});
 
         let player = await models['player'].create({
             name: 'James bond',
             desc: 'big man'
-        },{t});
+        }, {t});
 
         let player1 = await models['player'].create({
             name: 'James bond1',
             desc: 'big man1'
-        },{t});
+        }, {t});
         let player2 = await models['player'].create({
             name: 'James bond2',
             desc: 'big man2'
-        },{t});
+        }, {t});
 
         // belongsTo
         let settle_team_address = await player.setTeam1(team, {t});
@@ -41,7 +37,28 @@ models.sequelize.sync(
         let settle_team_address2 = await team.addPlayers([player2], {t});
 
         await t.commit();
-    }catch(err) {
+
+        let all_player = await models['team1'].findAll({
+            where: {
+                name: 'team_name_one'
+            },
+            // required: false,
+            include: [
+                {
+                    where: {
+                        // name: 'James bond1'
+                    },
+                    model: models['player'],
+                    through: 'team_player_uuid',
+                    // to return all parent instances
+                    required: false,
+                    all: true,
+                    nested: true
+                }
+            ]
+        });
+        console.log(JSON.stringify(all_player));
+    } catch (err) {
         console.log(err);
         await t.rollback();
     }

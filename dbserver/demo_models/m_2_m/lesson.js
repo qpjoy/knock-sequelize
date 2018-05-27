@@ -2,22 +2,22 @@ const Sequelize = require('sequelize');
 const uuid = require('uuid');
 module.exports = (sequelize, DataTypes) => {
 
-    const Team = sequelize.define('team', {
+    const Lesson = sequelize.define('lesson', {
         id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
+            type: DataTypes.BIGINT,
             allowNull: false,
             autoIncrement: true,
             unique: true
         },
         uuid: {
+            primaryKey: true,
             type: DataTypes.STRING,
-            defaultValue: function () {
+            defaultValue: function() {
                 return uuid.v4();
             },
             unique: true,
             allowNull: false,
-            field: 'team_uuid'
+            field: 'lesson_uuid'
         },
         name: {
             type: DataTypes.STRING,
@@ -31,23 +31,25 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: ''
         }
     }, {
-        schema: '1_2_1',
-        timestamps: true,
+        schema: 'm_2_m',
+        timestamps: false,
         underscored: true,
         // paranoid: true,
         freezeTableName: true,
-        tableName: 'team',
+        tableName: 'lesson',
         charset: 'utf8',
         collate: 'utf8_general_ci'
     });
 
-    Team.associate = function (models) {
-        // Team.hasMany(models['player'], {
-        //     sourceKey: 'team_uuid',
-        //     foreignKey: 'team_player_uuid',
-        //     constraints: false
-        // });
+    Lesson.associate = function (models) {
+        Lesson.belongsToMany(models['student'], {
+            through: 'studentLesson',
+            // foreignKey: 'uuid_lesson',
+            // sourceKey: 'uuid',
+            // otherKey: 'uuid',
+            constraints: false
+        });
     };
 
-    return Team;
+    return Lesson;
 };

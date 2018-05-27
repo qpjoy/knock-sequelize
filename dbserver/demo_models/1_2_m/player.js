@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     const Player = sequelize.define('player', {
         id: {
             type: DataTypes.BIGINT,
-            primaryKey: true,
             allowNull: false,
             autoIncrement: true,
             unique: true
         },
         uuid: {
             type: DataTypes.STRING,
+            primaryKey: true,
             defaultValue: function() {
                 return uuid.v4();
             },

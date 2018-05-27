@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     const Team = sequelize.define('team1', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true,
             allowNull: false,
             autoIncrement: true,
             unique: true
         },
         team_uuid: {
             type: DataTypes.STRING,
+            primaryKey: true,
             defaultValue: function () {
                 return uuid.v4();
             },

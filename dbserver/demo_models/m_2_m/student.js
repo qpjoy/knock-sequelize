@@ -2,31 +2,23 @@ const Sequelize = require('sequelize');
 const uuid = require('uuid');
 module.exports = (sequelize, DataTypes) => {
 
-    const Player = sequelize.define('player', {
+    const Student = sequelize.define('student', {
         id: {
-            type: DataTypes.BIGINT,
-            primaryKey: true,
+            type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             unique: true
         },
         uuid: {
+            primaryKey: true,
             type: DataTypes.STRING,
-            defaultValue: function() {
+            defaultValue: function () {
                 return uuid.v4();
             },
             unique: true,
             allowNull: false,
-            field: 'player_uuid'
+            field: 'student_uuid'
         },
-        // player__uuid: {
-        //     type: DataTypes.STRING,
-        //     defaultValue: function() {
-        //         return uuid.v4();
-        //     },
-        //     allowNull: false,
-        //     field: 'player__uuid'
-        // },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -39,25 +31,28 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: ''
         }
     }, {
-        schema: '1_2_1',
-        timestamps: false,
+        schema: 'm_2_m',
+        timestamps: true,
         underscored: true,
         // paranoid: true,
         freezeTableName: true,
-        tableName: 'player',
+        tableName: 'student',
         charset: 'utf8',
         collate: 'utf8_general_ci'
     });
 
-    Player.associate = function (models) {
-        Player.belongsTo(models['team'], {
-            // as: 'Player',
-            sourceKey: 'player_uuid',
-            foreignKey: 'team_uuid',
-            targetKey: 'uuid',
+    Student.associate = function (models) {
+
+        Student.belongsToMany(models['lesson'], {
+            through: {
+                model: models['studentLesson'],
+                unique: false,
+            },
+            // foreignKey: 'uuid',
+            // otherKey: 'student_uuid',
             constraints: false
         });
     };
 
-    return Player;
+    return Student;
 };
