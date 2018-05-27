@@ -7,7 +7,7 @@ module.exports = {
         host: process.env.POSTGRES_HOST?process.env.POSTGRES_HOST:'127.0.0.1',
         port: process.env.POSTGRES_PORT?process.env.POSTGRES_PORT:5432,
         username: process.env.POSTGRES_USER?rocess.env.POSTGRES_USER:'postgres',
-        password: process.env.POSTGRES_PASSWORD?process.env.POSTGRES_PASSWORD: 'admin',
+        password: process.env.POSTGRES_PASSWORD?process.env.POSTGRES_PASSWORD: 'C',
         database: process.env.POSTGRES_DB?process.env.POSTGRES_DB: 'knock_sequelize',
 
         dialect: 'postgres',
