@@ -12,9 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         team_uuid: {
             type: DataTypes.STRING,
             primaryKey: true,
-            defaultValue: function () {
-                return uuid.v4();
-            },
+	          defaultValue: DataTypes.UUIDV4,
             unique: true,
             allowNull: false,
             field: 'team_uuid'

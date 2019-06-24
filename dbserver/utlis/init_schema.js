@@ -10,6 +10,7 @@ const init_schemas = ['intern', 'test1','one_to_one'];
 
 module.exports = {
     init_schemas: async function() {
+	      await sequelize.authenticate();
         // create if not exist schema
         log(color.blue('Initializing schemas ... without public') + color.red('!'));
         let exist_schemas = await sequelize.showAllSchemas();
